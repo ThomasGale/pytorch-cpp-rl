@@ -39,12 +39,9 @@ endif(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
 # Dependencies
 ## PyTorch
-if (NOT TORCH_FOUND)
-    find_package(Torch REQUIRED)
-    if (TORCH_CXX_FLAGS)
-        set(CMAKE_CXX_FLAGS ${TORCH_CXX_FLAGS})
-    endif()
-endif (NOT TORCH_FOUND)
+list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/libtorch")
+find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 # Define targets
 add_library(cpprl STATIC "")
