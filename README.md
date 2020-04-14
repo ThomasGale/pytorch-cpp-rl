@@ -30,11 +30,11 @@ At the time of writing, there are no general-use reinforcement learning framewor
 An example that uses the included OpenAI Gym server is provided in `example`. It can be run as follows:
 Terminal 1:
 ```bash
-./launch_gym_server.py
+python3 ./launch_gym_server.py
 ```
 Terminal 2:
 ```bash
-build/example/gym_server
+build/example/gym_client
 ```
 
 It takes about 60 seconds to train an agent to 200 average reward on my laptop (i7-8550U processor).
@@ -42,6 +42,15 @@ It takes about 60 seconds to train an agent to 200 average reward on my laptop (
 The environment and hyperparameters can be set in `example/gym_client.cpp`.
 
 Note: The Gym server and client aren't very well optimized, especially when it comes to environments with image observations. There are a few extra copies necessitated by using an inter-process communication system, and then `gym_client.cpp` has an extra copy or two to turn the observations into PyTorch tensors. This is why the performance isn't that good when compared with Python libraries running Gym environments.
+
+## For containerised development on host system (using [Visual Studio Code Remote - Containers](https://code.visualstudio.com/docs/remote/containers))
+- Docker (e.g. [Ubuntu](https://docs.docker.com/engine/install/ubuntu/))
+- WIP for CUDA - Host has lastest PPA drivers and [nvidia docker toolkit](https://github.com/NVIDIA/nvidia-docker)
+
+### Steps
+- Boot VSCode with container extension
+- Reopen in container
+- Use internal `bash` terminals to run example
 
 ## Building
 CMake is used for the build system. 
