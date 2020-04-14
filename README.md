@@ -44,6 +44,7 @@ The environment and hyperparameters can be set in `example/gym_client.cpp`.
 Note: The Gym server and client aren't very well optimized, especially when it comes to environments with image observations. There are a few extra copies necessitated by using an inter-process communication system, and then `gym_client.cpp` has an extra copy or two to turn the observations into PyTorch tensors. This is why the performance isn't that good when compared with Python libraries running Gym environments.
 
 ## For containerised development on host system (using [Visual Studio Code Remote - Containers](https://code.visualstudio.com/docs/remote/containers))
+- VSCode with `ms-vscode-remote.remote-containers` and `spadin.remote-x11-ssh`
 - Docker (e.g. [Ubuntu](https://docs.docker.com/engine/install/ubuntu/))
 - WIP for CUDA - Host has lastest PPA drivers and [nvidia docker toolkit](https://github.com/NVIDIA/nvidia-docker)
 

@@ -6,7 +6,7 @@ ENV CMAKE_VERSION=3.17.1
 
 RUN apt-get update \
     # Pre-requsities and development tools.
-    && apt-get install -y software-properties-common unzip wget git build-essential gdb clang python3-pip libopenmpi-dev python3-dev zlib1g-dev libsm6 libxext6 libxrender-dev \
+    && apt-get install -y software-properties-common unzip wget git build-essential gdb clang python3-pip python-opengl libopenmpi-dev python3-dev zlib1g-dev libsm6 libxext6 libxrender-dev \
     #
     # Install CMake binary
     && mkdir ~/temp \
@@ -17,7 +17,7 @@ RUN apt-get update \
     && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake \
     && cmake --version \
     # 
-    # CUDA - WIP
+    # CUDA - TODO
     #&& wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin \
     #&& mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600 \
     #&& apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub \
@@ -42,3 +42,18 @@ RUN apt-get update \
     && rm -r ~/temp \
     && apt-get autoremove -y \
     && apt-get clean -y
+
+# Configure a SUDO non-root user (no password)
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+# [Optional] Set the default user. Omit if you want to keep the default as root.
+USER $USERNAME
