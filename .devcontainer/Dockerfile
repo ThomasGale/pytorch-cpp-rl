@@ -3,14 +3,15 @@ FROM nvidia/cudagl:10.2-devel-ubuntu18.04
 # Global settings
 ENV CMAKE_VERSION=3.17.1
 ENV TORCH_VERSION=1.5.0
-#ENV CUDA_VERSION=10.2
+# This is for CUDA 10.2
+ENV CUDA_NN_VERSION=7.6.5
 
 RUN apt-get update \
     # Pre-requsities and development tools.
     && apt-get install -y software-properties-common unzip wget git build-essential gdb clang python3-pip python-opengl libopenmpi-dev python3-dev zlib1g-dev libsm6 libxext6 libxrender-dev \
     #
     # Install CMake binary
-    && mkdir ~/temp \
+    && mkdir -p ~/temp \
     && cd ~/temp \
     && wget https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.sh \
     && mkdir /opt/cmake \
@@ -20,6 +21,9 @@ RUN apt-get update \
     #
     # GL - WIP
     && apt-get install -y mesa-utils \
+    #
+    # cuDNN - We need to use a mounted path with the downloaded tar file (you will need to download via nvidia login page)
+    # TODO
     #
     # Torch C++ (CUDA) 
     && cd ~/temp && wget https://download.pytorch.org/libtorch/cu102/libtorch-shared-with-deps-$TORCH_VERSION.zip \
