@@ -35,7 +35,7 @@ RUN apt-get update \
     #
     # Python packages for OpenAI Gym, box2d environment (for LunarLander) and CPU tensorflow
     && pip3 install numpy 'gym[box2d]' tensorflow==1.14 zmq msgpack \
-    && cd ~ && git clone https://github.com/openai/baselines.git \
+    && cd /usr/local && git clone https://github.com/openai/baselines.git \
     && cd baselines && pip3 install -e . \
     #
     # Clean up
