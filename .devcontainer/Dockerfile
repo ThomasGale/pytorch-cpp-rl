@@ -1,7 +1,8 @@
-FROM nvidia/cudagl:10.2-base-ubuntu18.04
+FROM nvidia/cudagl:10.2-devel-ubuntu18.04
 
 # Global settings
 ENV CMAKE_VERSION=3.17.1
+ENV TORCH_VERSION=1.5.0
 #ENV CUDA_VERSION=10.2
 
 RUN apt-get update \
@@ -19,21 +20,10 @@ RUN apt-get update \
     #
     # GL - WIP
     && apt-get install -y mesa-utils \
-    # 
-    # CUDA - TODO (NOT NEEDED if base image is nvidia/cudagl?)
-    #&& wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin \
-    #&& mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600 \
-    #&& apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub \
-    #&& add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /" \
-    #&& apt update \
-    #&& apt -y install cuda-$CUDA_VERSION \
-    #&& \
-    #&& \
     #
-    # Torch C++ (CPU for now) 
-    && torch_version=1.4.0 \
-    && cd ~/temp && wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-$torch_version%2Bcpu.zip \
-    && unzip libtorch-shared-with-deps-$torch_version+cpu.zip \
+    # Torch C++ (CUDA) 
+    && cd ~/temp && wget https://download.pytorch.org/libtorch/cu102/libtorch-shared-with-deps-$TORCH_VERSION.zip \
+    && unzip libtorch-shared-with-deps-$TORCH_VERSION.zip \
     && cp -r libtorch /usr/local/lib/ \
     #
     # Python packages for OpenAI Gym, box2d environment (for LunarLander) and CPU tensorflow

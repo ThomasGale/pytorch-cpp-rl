@@ -51,7 +51,7 @@ Note: The Gym server and client aren't very well optimized, especially when it c
 ### Steps
 - Boot VSCode with container extension
 - Reopen in container
-- Use internal `bash` terminals to run example
+- Use internal `bash` terminals to run `Linux` example
 
 ## Building
 CMake is used for the build system. 
