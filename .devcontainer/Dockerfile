@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM nvidia/cudagl:10.2-base-ubuntu18.04
 
 # Global settings
 ENV CMAKE_VERSION=3.17.1
@@ -16,14 +16,17 @@ RUN apt-get update \
     && sh cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/opt/cmake --skip-license \
     && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake \
     && cmake --version \
+    #
+    # GL - WIP
+    && apt-get install -y mesa-utils \
     # 
-    # CUDA - TODO
+    # CUDA - TODO (NOT NEEDED if base image is nvidia/cudagl?)
     #&& wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin \
     #&& mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600 \
     #&& apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub \
     #&& add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /" \
-    #&& apt-get update \
-    #&& apt-get -y install cuda-$CUDA_VERSION \
+    #&& apt update \
+    #&& apt -y install cuda-$CUDA_VERSION \
     #&& \
     #&& \
     #
