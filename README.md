@@ -47,6 +47,7 @@ Note: The Gym server and client aren't very well optimized, especially when it c
 - VSCode with `ms-vscode-remote.remote-containers` and `spadin.remote-x11-ssh`
 - Docker (e.g. [Ubuntu](https://docs.docker.com/engine/install/ubuntu/))
 - WIP for CUDA - Host has lastest PPA drivers and [nvidia docker toolkit](https://github.com/NVIDIA/nvidia-docker)
+- [Download CUDAnn v7.6.5 (if you have CUDA 10.2)](https://developer.nvidia.com/cudnn) (you will need to sign up for NVIDIA account)
 
 ### Steps
 - Boot VSCode with container extension

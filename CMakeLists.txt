@@ -37,13 +37,7 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     )
 endif(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
-# Dependencies
-## CUDA (Experimenting with GPU acceleration) (using nvidia/cuda base image)
-#list(APPEND CMAKE_PREFIX_PATH "$ENV{LD_LIBRARY_PATH}")
-
 ## PyTorch
-#set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda-10.2")
-#set(CUDA_CUDART_LIBRARY "/usr/local/cuda-10.2/lib64/libcudart.so.10.2")
 list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/libtorch")
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
