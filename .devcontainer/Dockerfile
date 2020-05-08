@@ -1,8 +1,10 @@
-FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 # Global settings
+# Torch 1.4, only has Cuda 10.2 support (I think..)
 ENV CMAKE_VERSION=3.17.1
-ENV TORCH_VERSION=1.5.0
+ENV TORCH_CUDA=cu101
+ENV TORCH_VERSION=1.4.0
 
 # OpenGL - (glvnd)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -40,7 +42,7 @@ RUN mkdir -p ~/temp \
     && cmake --version
 
 # Torch C++ (CUDA) 
-RUN cd ~/temp && wget https://download.pytorch.org/libtorch/cu102/libtorch-shared-with-deps-$TORCH_VERSION.zip \
+RUN cd ~/temp && wget https://download.pytorch.org/libtorch/$TORCH_CUDA/libtorch-shared-with-deps-$TORCH_VERSION.zip \
     && unzip libtorch-shared-with-deps-$TORCH_VERSION.zip \
     && cp -r libtorch /usr/local/lib/ 
 

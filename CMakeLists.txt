@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10.0)
 project(CppRl
     LANGUAGES CXX
     VERSION 1.2.0
-    DESCRIPTION "Reinforcement learning in C++ using PyTorch"
+    DESCRIPTION "Reinforcement learning in C++ using PyTorch 1.4.0"
 )
 
 # Project-wide properties
@@ -69,7 +69,7 @@ if (CPPRL_BUILD_TESTS)
 endif(CPPRL_BUILD_TESTS)
 
 # Linking
-target_link_libraries(cpprl torch ${TORCH_LIBRARIES})
+#target_link_libraries(cpprl torch ${TORCH_LIBRARIES})
 target_link_libraries(cpprl torch ${TORCH_LIBRARIES})
 if (CPPRL_BUILD_TESTS)
     target_link_libraries(cpprl_tests torch ${TORCH_LIBRARIES})
