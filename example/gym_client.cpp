@@ -42,7 +42,7 @@ const float render_reward_threshold = 160;
 // Model hyperparameters
 const int hidden_size = 64;
 const bool recurrent = false;
-const bool use_cuda = false;
+const bool use_cuda = true;
 
 std::vector<float> flatten_vector(std::vector<float> const &input)
 {

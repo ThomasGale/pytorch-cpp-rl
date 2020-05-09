@@ -1,7 +1,7 @@
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 # Global settings
-# Torch 1.4, only has Cuda 10.2 support (I think..)
+# Torch 1.4, only has Cuda 10.1 support (I think..)
 ENV CMAKE_VERSION=3.17.1
 ENV TORCH_CUDA=cu101
 ENV TORCH_VERSION=1.4.0
@@ -30,7 +30,6 @@ RUN apt-get update \
         build-essential gdb clang \
         python3-dev python3-pip python-opengl \
         libopenmpi-dev zlib1g-dev libsm6 libxext6 libxrender-dev
-
 
 # Install CMake binary
 RUN mkdir -p ~/temp \
