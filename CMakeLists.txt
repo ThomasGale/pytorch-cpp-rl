@@ -37,7 +37,7 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     )
 endif(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
-## PyTorch
+## PyTorch (Dockerfile installed prefix, if different you will need run `cmake -DCMAKE_PREFIX_PATH=/absolute/path/to/libtorch ..`)
 list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/libtorch")
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
@@ -69,7 +69,6 @@ if (CPPRL_BUILD_TESTS)
 endif(CPPRL_BUILD_TESTS)
 
 # Linking
-#target_link_libraries(cpprl torch ${TORCH_LIBRARIES})
 target_link_libraries(cpprl torch ${TORCH_LIBRARIES})
 if (CPPRL_BUILD_TESTS)
     target_link_libraries(cpprl_tests torch ${TORCH_LIBRARIES})
